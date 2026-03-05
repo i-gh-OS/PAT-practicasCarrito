@@ -1,50 +1,45 @@
 package edu.comillas.icai.gitt.pat.spring.mvc.controlador;
 
 import edu.comillas.icai.gitt.pat.spring.mvc.modelo.Carrito;
+import edu.comillas.icai.gitt.pat.spring.mvc.service.CarritoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @RestController
 public class CarritoControlador {
-    private final Map<Integer, Carrito> carritos = new HashMap<>(); //tipo del hashmap debe coincidir con la del carrito
 
-    //ahora importamos las peticiones que tenemos que hacer
+    private final CarritoService carritoService;
 
-    //leer todos los carritos
-    @GetMapping("/api/carrito")
-    public Collection<Carrito> getCarritos() {
-        return carritos.values();
+    public CarritoControlador(CarritoService carritoService) {
+        this.carritoService = carritoService;
     }
 
-    //crear un carrito
+    @GetMapping("/api/carrito")
+    public List<Carrito> getCarritos() {
+        return carritoService.getCarritos();
+    }
+
     @PostMapping("/api/carrito")
     @ResponseStatus(HttpStatus.CREATED)
     public Carrito creaCarrito(@RequestBody Carrito carrito) {
-        carritos.put(carrito.getIdCarrito(), carrito);
-        return carrito;
+        return carritoService.crearCarrito(carrito);
     }
 
-    //leer un carrito especifico
     @GetMapping("/api/carrito/{idCarrito}")
-    public Carrito getCarrito(@PathVariable int idCarrito) {
-        return carritos.get(idCarrito);
+    public Carrito getCarrito(@PathVariable long idCarrito) {
+        return carritoService.getCarrito(idCarrito);
     }
 
     @DeleteMapping("/api/carrito/{idCarrito}")
-    public void borrarCarrito(@PathVariable int idCarrito) {
-        carritos.remove(idCarrito);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void borrarCarrito(@PathVariable long idCarrito) {
+        carritoService.borrarCarrito(idCarrito);
     }
 
-    //modificar carrito
-    @PostMapping("/api/carrito/{idCarrito}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Carrito modificaCarrito(@PathVariable int idCarrito, @RequestBody Carrito carrito) {
-        carritos.put(idCarrito, carrito);
-        return carrito;
+    @PutMapping("/api/carrito/{idCarrito}")
+    public Carrito modificaCarrito(@PathVariable long idCarrito, @RequestBody Carrito carrito) {
+        return carritoService.modificarCarrito(idCarrito, carrito);
     }
-
 }
