@@ -76,6 +76,40 @@ async function eliminar(idLinea) {
     }
 }
 
+function configurarFormularioCompra() {
+    const formulario = document.querySelector(".formulario");
+
+    if (!formulario) {
+        return;
+    }
+
+    formulario.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const datosCompra = {
+            nombre: formulario.nombre.value,
+            correo: formulario.correo.value,
+            direccion: formulario.direccion.value,
+            fecha: formulario.fecha.value,
+            pago: formulario.pago.value,
+            comentarios: formulario.comentarios.value
+        };
+
+        try {
+            const respuesta = await confirmarCompra(datosCompra);
+            formulario.reset();
+            await cargarCarrito();
+            alert(`${respuesta.mensaje}. Total: ${formatearImporte(respuesta.totalPrecio)}`);
+        } catch (error) {
+            console.error(error);
+            alert("No se pudo confirmar la compra.");
+        }
+    });
+}
+
 window.eliminar = eliminar;
 
-document.addEventListener("DOMContentLoaded", cargarCarrito);
+document.addEventListener("DOMContentLoaded", () => {
+    configurarFormularioCompra();
+    cargarCarrito();
+});

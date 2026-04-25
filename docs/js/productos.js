@@ -7,7 +7,7 @@ async function agregar(idArticulo, precioUnitario) {
         alert(`${nombre} se ha anadido al carrito.`);
     } catch (error) {
         console.error(error);
-        alert("No se pudo anadir el producto al carrito.");
+        alert(error.message);
     }
 }
 

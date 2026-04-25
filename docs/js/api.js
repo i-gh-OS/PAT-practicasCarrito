@@ -9,12 +9,19 @@ const PRODUCTOS = {
 };
 
 async function request(path, options = {}) {
-    const response = await fetch(`${API_URL}${path}`, {
-        headers: {
-            Accept: "application/json"
-        },
-        ...options
-    });
+    let response;
+
+    try {
+        response = await fetch(`${API_URL}${path}`, {
+            headers: {
+                Accept: "application/json"
+            },
+            targetAddressSpace: "local",
+            ...options
+        });
+    } catch (error) {
+        throw new Error("No se pudo conectar con el backend en localhost:8080. Comprueba que Spring Boot esta arrancado y que el navegador ha permitido el acceso local.");
+    }
 
     if (!response.ok) {
         let mensaje = `Error ${response.status}`;
@@ -57,5 +64,16 @@ async function addProducto(idArticulo, precioUnitario, unidades = 1) {
 async function borrarLinea(idLinea) {
     return request(`/carrito/${ID_CARRITO}/lineas/${idLinea}`, {
         method: "DELETE"
+    });
+}
+
+async function confirmarCompra(datosCompra) {
+    return request(`/carrito/${ID_CARRITO}/confirmar`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(datosCompra)
     });
 }
