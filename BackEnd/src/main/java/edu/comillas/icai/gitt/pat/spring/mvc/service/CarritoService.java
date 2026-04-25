@@ -10,7 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class CarritoService {
@@ -96,11 +100,64 @@ public class CarritoService {
         return carrito;
     }
 
+    @Transactional
+    public Map<String, Object> confirmarCompra(Long idCarrito, Map<String, String> datosCompra) {
+        Carrito carrito = lee(idCarrito);
+        List<LineaCarrito> lineas = new ArrayList<>(carrito.getLineas());
+
+        String nombre = valorTexto(datosCompra, "nombre");
+        String correo = valorTexto(datosCompra, "correo");
+        String direccion = valorTexto(datosCompra, "direccion");
+        String fecha = valorTexto(datosCompra, "fecha");
+        String pago = valorTexto(datosCompra, "pago");
+        String comentarios = valorTexto(datosCompra, "comentarios");
+
+        if (nombre == null || correo == null || direccion == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "nombre, correo y direccion son obligatorios");
+        }
+        if (lineas.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El carrito esta vacio");
+        }
+
+        Map<String, Object> respuesta = new LinkedHashMap<>();
+        respuesta.put("mensaje", "Compra confirmada correctamente");
+        respuesta.put("idCarrito", carrito.getIdCarrito());
+        respuesta.put("nombre", nombre);
+        respuesta.put("correo", correo);
+        respuesta.put("direccion", direccion);
+        respuesta.put("fecha", fecha);
+        respuesta.put("pago", pago);
+        respuesta.put("comentarios", comentarios);
+        respuesta.put("totalPrecio", carrito.getTotalPrecio());
+        respuesta.put("numeroLineas", lineas.size());
+
+        lineaCarritoRepository.deleteAll(lineas);
+        carrito.getLineas().clear();
+        carrito.setTotalPrecio(BigDecimal.ZERO);
+        carritoRepository.save(carrito);
+
+        return respuesta;
+    }
+
     private void recalculaTotal(Carrito carrito) {
         BigDecimal total = BigDecimal.ZERO;
         for (LineaCarrito l : carrito.getLineas()) {
             if (l.getCosteLinea() != null) total = total.add(l.getCosteLinea());
         }
         carrito.setTotalPrecio(total);
+    }
+
+    private String valorTexto(Map<String, String> datosCompra, String clave) {
+        if (datosCompra == null) {
+            return null;
+        }
+
+        String valor = datosCompra.get(clave);
+        if (valor == null) {
+            return null;
+        }
+
+        String texto = valor.trim();
+        return texto.isEmpty() ? null : texto;
     }
 }

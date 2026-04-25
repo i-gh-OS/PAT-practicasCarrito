@@ -5,11 +5,11 @@ import edu.comillas.icai.gitt.pat.spring.mvc.repository.CarritoRepository;
 import edu.comillas.icai.gitt.pat.spring.mvc.service.CarritoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
-@CrossOrigin(origins = "*")
 public class CarritoControlador {
 
     @Autowired
@@ -52,5 +52,11 @@ public class CarritoControlador {
     @DeleteMapping("/api/carrito/{idCarrito}/lineas/{idLinea}")
     public Carrito borraLinea(@PathVariable Long idCarrito, @PathVariable Long idLinea) {
         return servicio.borraLinea(idCarrito, idLinea);
+    }
+
+    @PostMapping("/api/carrito/{idCarrito}/confirmar")
+    public Map<String, Object> confirmarCompra(@PathVariable Long idCarrito,
+                                               @RequestBody Map<String, String> datosCompra) {
+        return servicio.confirmarCompra(idCarrito, datosCompra);
     }
 }
