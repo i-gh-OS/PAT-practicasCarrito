@@ -22,24 +22,29 @@
   <main class="contenedor">
     <section class="bloque">
       <h2>Resumen del pedido</h2>
-      <p>Aqui se puede ver una simulacion del carrito con varios productos anadidos.</p>
+      <p>Aqui se muestra el carrito cargado desde el backend.</p>
+
       <table>
         <thead>
           <tr>
-            <th>Producto</th>
+            <th>Articulo</th>
             <th>Cantidad</th>
             <th>Precio</th>
             <th>Subtotal</th>
+            <th>Accion</th>
           </tr>
         </thead>
-        <tbody id="tabla-carrito"></tbody>
+        <tbody id="tabla-carrito">
+        </tbody>
       </table>
+
       <p><strong>Total:</strong> <span id="total"></span></p>
     </section>
 
     <section class="bloque">
       <h2>Formulario de compra</h2>
       <p>Completa los siguientes datos para realizar el pedido.</p>
+
       <form action="#" method="post" class="formulario">
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -71,6 +76,7 @@
   <footer class="pie">
     <p><a href="contacto.html">Si tienes dudas, entra en la pagina de contacto</a></p>
   </footer>
+
   <script src="js/api.js"></script>
   <script src="js/carrito.js"></script>
 </body>

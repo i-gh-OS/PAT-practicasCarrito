@@ -1,4 +1,4 @@
-async function agregar(id, precio) {
-    await addProducto(id, precio, 1);
-    alert("Producto añadido");
+async function agregar(idArticulo, precioUnitario) {
+    await addProducto(idArticulo, precioUnitario, 1);
+    alert("Producto añadido al carrito");
 }
