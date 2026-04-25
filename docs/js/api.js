@@ -1,19 +1,61 @@
 const API_URL = "http://localhost:8080/api";
 const ID_CARRITO = 1;
 
-async function getCarrito() {
-    const res = await fetch(`${API_URL}/carrito/${ID_CARRITO}`);
-    return await res.json();
+const PRODUCTOS = {
+    501: { nombre: "Manzanas", precio: 2.40 },
+    502: { nombre: "Pan integral", precio: 1.85 },
+    503: { nombre: "Leche", precio: 1.15 },
+    504: { nombre: "Detergente", precio: 6.20 }
+};
+
+async function request(path, options = {}) {
+    const response = await fetch(`${API_URL}${path}`, {
+        headers: {
+            Accept: "application/json"
+        },
+        ...options
+    });
+
+    if (!response.ok) {
+        let mensaje = `Error ${response.status}`;
+
+        try {
+            const texto = await response.text();
+            if (texto) {
+                mensaje = texto;
+            }
+        } catch (error) {
+            console.error("No se pudo leer el error de la API", error);
+        }
+
+        throw new Error(mensaje);
+    }
+
+    if (response.status === 204) {
+        return null;
+    }
+
+    return response.json();
 }
 
-async function addProducto(idArticulo, precio, unidades) {
-    await fetch(`${API_URL}/carrito/${ID_CARRITO}/lineas?idArticulo=${idArticulo}&precioUnitario=${precio}&unidades=${unidades}`, {
+async function getCarrito() {
+    return request(`/carrito/${ID_CARRITO}`);
+}
+
+async function addProducto(idArticulo, precioUnitario, unidades = 1) {
+    const params = new URLSearchParams({
+        idArticulo: String(idArticulo),
+        precioUnitario: String(precioUnitario),
+        unidades: String(unidades)
+    });
+
+    return request(`/carrito/${ID_CARRITO}/lineas?${params.toString()}`, {
         method: "POST"
     });
 }
 
 async function borrarLinea(idLinea) {
-    await fetch(`${API_URL}/carrito/${ID_CARRITO}/lineas/${idLinea}`, {
+    return request(`/carrito/${ID_CARRITO}/lineas/${idLinea}`, {
         method: "DELETE"
     });
 }

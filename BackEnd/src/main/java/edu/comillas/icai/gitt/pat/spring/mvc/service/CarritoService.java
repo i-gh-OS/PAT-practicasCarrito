@@ -65,6 +65,7 @@ public class CarritoService {
             linea.setIdArticulo(idArticulo);
             linea.setPrecioUnitario(precioUnitario);
             linea.setUnidades(unidades);
+            carrito.getLineas().add(linea);
         } else {
             linea.setUnidades(linea.getUnidades() + unidades);
             linea.setPrecioUnitario(precioUnitario); // decisión simple para práctica
@@ -86,6 +87,7 @@ public class CarritoService {
         LineaCarrito linea = lineaCarritoRepository.findByIdLineaAndCarrito_IdCarrito(idLinea, idCarrito)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Línea no encontrada en ese carrito"));
 
+        carrito.getLineas().removeIf(l -> idLinea.equals(l.getIdLinea()));
         lineaCarritoRepository.delete(linea);
 
         recalculaTotal(carrito);
