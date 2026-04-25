@@ -1,5 +1,6 @@
 package edu.comillas.icai.gitt.pat.spring.mvc.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
@@ -27,6 +28,13 @@ public class LineaCarrito {
 
     @Column(name = "coste_linea", nullable = false)
     private BigDecimal costeLinea;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_carrito", nullable = false)
+    @JsonIgnore
+    private Carrito carrito;
 
     public LineaCarrito() {
     }

@@ -32,28 +32,9 @@
             <th>Subtotal</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Manzanas</td>
-            <td>2</td>
-            <td>2,40 EUR</td>
-            <td>4,80 EUR</td>
-          </tr>
-          <tr>
-            <td>Pan integral</td>
-            <td>2</td>
-            <td>1,85 EUR</td>
-            <td>3,70 EUR</td>
-          </tr>
-          <tr>
-            <td>Leche</td>
-            <td>3</td>
-            <td>1,15 EUR</td>
-            <td>3,45 EUR</td>
-          </tr>
-        </tbody>
+        <tbody id="tabla-carrito"></tbody>
       </table>
-      <p><strong>Total:</strong> 11,95 EUR</p>
+      <p><strong>Total:</strong> <span id="total"></span></p>
     </section>
 
     <section class="bloque">
@@ -90,5 +71,7 @@
   <footer class="pie">
     <p><a href="contacto.html">Si tienes dudas, entra en la pagina de contacto</a></p>
   </footer>
+  <script src="js/api.js"></script>
+  <script src="js/carrito.js"></script>
 </body>
 </html>
