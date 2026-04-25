@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito Fresco | Carrito</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <h1>Carrito</h1>
+    <p>Resumen del pedido seleccionado por el cliente.</p>
+  </header>
+
+  <nav class="menu-principal">
+    <a href="index.html">Inicio</a>
+    <a href="productos.html">Productos</a>
+    <a href="carrito.html" class="activo">Carrito</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+
+  <main class="contenedor">
+    <section class="bloque">
+      <h2>Resumen del pedido</h2>
+      <p>Aqui se puede ver una simulacion del carrito con varios productos anadidos.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Manzanas</td>
+            <td>2</td>
+            <td>2,40 EUR</td>
+            <td>4,80 EUR</td>
+          </tr>
+          <tr>
+            <td>Pan integral</td>
+            <td>2</td>
+            <td>1,85 EUR</td>
+            <td>3,70 EUR</td>
+          </tr>
+          <tr>
+            <td>Leche</td>
+            <td>3</td>
+            <td>1,15 EUR</td>
+            <td>3,45 EUR</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>Total:</strong> 11,95 EUR</p>
+    </section>
+
+    <section class="bloque">
+      <h2>Formulario de compra</h2>
+      <p>Completa los siguientes datos para realizar el pedido.</p>
+      <form action="#" method="post" class="formulario">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="correo">Correo electronico</label>
+        <input type="email" id="correo" name="correo" required>
+
+        <label for="direccion">Direccion</label>
+        <input type="text" id="direccion" name="direccion" required>
+
+        <label for="fecha">Fecha de entrega</label>
+        <input type="date" id="fecha" name="fecha">
+
+        <label for="pago">Metodo de pago</label>
+        <select id="pago" name="pago">
+          <option>Tarjeta</option>
+          <option>Bizum</option>
+          <option>Efectivo</option>
+        </select>
+
+        <label for="comentarios">Comentarios</label>
+        <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+
+        <button type="submit">Confirmar compra</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p><a href="contacto.html">Si tienes dudas, entra en la pagina de contacto</a></p>
+  </footer>
+</body>
+</html>

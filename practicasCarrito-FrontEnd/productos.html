@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito Fresco | Productos</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <h1>Productos</h1>
+    <p>Listado de algunos productos disponibles en la tienda.</p>
+  </header>
+
+  <nav class="menu-principal">
+    <a href="index.html">Inicio</a>
+    <a href="productos.html" class="activo">Productos</a>
+    <a href="carrito.html">Carrito</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+
+  <main class="contenedor">
+    <section class="bloque">
+      <h2>Tabla de productos</h2>
+      <p>En esta tabla se muestran algunos productos con su categoria, precio y disponibilidad.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Categoria</th>
+            <th>Precio</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Manzanas</td>
+            <td>Fruta</td>
+            <td>2,40 EUR</td>
+            <td>Disponible</td>
+          </tr>
+          <tr>
+            <td>Pan integral</td>
+            <td>Panaderia</td>
+            <td>1,85 EUR</td>
+            <td>Disponible</td>
+          </tr>
+          <tr>
+            <td>Leche</td>
+            <td>Lacteos</td>
+            <td>1,15 EUR</td>
+            <td>Disponible</td>
+          </tr>
+          <tr>
+            <td>Detergente</td>
+            <td>Hogar</td>
+            <td>6,20 EUR</td>
+            <td>Pocas unidades</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="bloque">
+      <h2>Productos destacados</h2>
+      <div class="galeria">
+        <figure>
+          <img src="frutasFrescas.jpg" alt="Cesta con frutas y verduras">
+          <figcaption>Seleccion de frutas y verduras frescas.</figcaption>
+        </figure>
+        <figure>
+          <img src="pan.jpg" alt="Barras y productos de panaderia">
+          <figcaption>Productos de panaderia recien preparados.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p><a href="carrito.html">Pasar al carrito</a></p>
+  </footer>
+</body>
+</html>

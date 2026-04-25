@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito Fresco | Contacto</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <h1>Contacto</h1>
+    <p>Pagina para enviar dudas, sugerencias o consultas.</p>
+  </header>
+
+  <nav class="menu-principal">
+    <a href="index.html">Inicio</a>
+    <a href="productos.html">Productos</a>
+    <a href="carrito.html">Carrito</a>
+    <a href="contacto.html" class="activo">Contacto</a>
+  </nav>
+
+  <main class="contenedor">
+    <section class="bloque">
+      <h2>Informacion de la tienda</h2>
+      <p>Telefono de atencion al cliente: 900 123 456</p>
+      <p>Horario de atencion: lunes a viernes de 9:00 a 20:00</p>
+      <img src="interiorTiendaFruta.jpg" alt="Interior de una tienda con productos frescos">
+    </section>
+
+    <section class="bloque">
+      <h2>Formulario de contacto</h2>
+      <p>Rellena este formulario si necesitas informacion sobre productos o pedidos.</p>
+      <form action="#" method="post" class="formulario">
+        <label for="asunto">Asunto</label>
+        <input type="text" id="asunto" name="asunto" required>
+
+        <label for="nombre-contacto">Nombre</label>
+        <input type="text" id="nombre-contacto" name="nombre-contacto" required>
+
+        <label for="email-contacto">Correo electronico</label>
+        <input type="email" id="email-contacto" name="email-contacto" required>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="6"></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p><a href="index.html">Volver al inicio</a></p>
+  </footer>
+</body>
+</html>
